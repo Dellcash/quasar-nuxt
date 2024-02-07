@@ -1,0 +1,196 @@
+// app global css in SCSS form
+@font-face {
+  font-family: IRANsansX;
+  src: url(assets/fonts/IranSansX/iransansX-family/IRANSansX-Medium.ttf);
+}
+
+body {
+  * {
+    font-family: IRANsansX;
+  }
+
+  &[data-lang="fa-IR"] {
+    * {
+      font-family: IRANsansX;
+    }
+  }
+
+  &[data-lang="ar-AR"] {
+    * {
+      font-family: IRANsansX;
+    }
+  }
+
+}
+
+.container {
+  width: 100%;
+  max-width: 1920px;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.body-container {
+  width: 100%;
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboar-container {
+  width: 100%;
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// BORDER RADIUS
+.border-radius-4 {
+  border-radius: 4px;
+}
+.border-radius-8 {
+  border-radius: 8px;
+}
+.border-radius-16 {
+  border-radius: 16px;
+}
+.border-radius-buttom {
+  border-radius: 0 0 8px 8px;
+}
+.border-radius-buttom-16 {
+  border-radius: 0 0 16px 16px;
+}
+.border-radius-top-16 {
+  border-radius: 16px 16px 0 0;
+}
+.border-radius-top-8 {
+  border-radius: 8px 8px 0 0;
+}
+.border-radius-top-4 {
+  border-radius: 4px 4px 0 0;
+}
+.border-radius-top-right-8 {
+  border-top-right-radius: 8px;
+}
+.border-radius-top-right-16 {
+  border-top-right-radius: 16px;
+}
+.border-radius-top-left-16 {
+  border-top-left-radius: 16px;
+}
+.border-radius-bottom-right-16 {
+  border-bottom-right-radius: 16px;
+}
+
+.border-radius-50 {
+  border-radius: 50%;
+}
+
+.q-field {
+  .q-field__control .q-field--dense  {
+    height: 40px;
+  }
+
+  .q-field__control {
+    border-radius: 4px;
+    color: $grey-2;
+    border-radius: 8px;
+  }
+
+  &__control {
+    height: 48px;
+  }
+
+  &__marginal {
+    height: 48px;
+  }
+
+  &__label {
+    top:14px;
+  }
+}
+
+.q-dialog {
+  &__inner > div {
+    border-radius: 8px;
+  }
+} 
+
+.q-card {
+  border-radius: 8px;
+}
+
+.q-btn--rectangle {
+  border-radius: 8px;
+}
+
+.q-field--auto-height .q-field__control,
+.q-field--auto-height .q-field__native {
+  min-height: 48px;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.custom-notify-success {
+  // height: 40px;
+  // width: 328px;
+  padding: 16px;
+  // border-left: 4px solid $success;
+  // border-radius: 2px 16px 16px 2px;
+  background-color: $on-success;
+}
+
+.custom-notify-error {
+  // height: 104px;
+  // width: 382px;
+  padding: 16px;
+  // border-left: 4px solid $error;
+  // border-radius: 2px 16px 16px 2px;
+  background-color: $on-error;
+}
+
+.custom-notify-warning {
+  // height: 104px;
+  // width: 382px;
+  padding: 16px;
+  // border-left: 4px solid $warning;
+  // border-radius: 2px 16px 16px 2px;
+  background-color: $warning;
+}
+
+.custom-notify-alert {
+  // height: 104px;
+  // width: 382px;
+    padding: 16px;
+  // border-left: 4px solid $primary;
+  // border-radius: 2px 16px 16px 2px;
+  background-color: $primary;
+}
+
+.login-logo-image {
+  width: 90px;
+  height: 70px;
+}
+
+.public-header-logo-img {
+  width: 60px;
+  height: 35px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
