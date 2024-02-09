@@ -24,7 +24,7 @@ const login = async () => {
     localStorage.setItem('token', response.access_token)
     nuxtApp.$router.push('/')
   } catch (err) {
-    console.log(err)
+    console.log('errrrrror', err)
   } finally {
     loading.value = false
   }
@@ -77,7 +77,6 @@ const login = async () => {
               :loading="loading"
               type="submit"
             />
-
           </q-form>
         </q-card-section>
       </q-card>

@@ -4,6 +4,9 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-quasar-ui'
   ],
+  runtimeConfig: {
+    baseURL: 'https://bazi-back.netall.live/api',
+  },
   quasar: {
 
     // lang: 'fa-IR',
