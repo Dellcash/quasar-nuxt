@@ -1,6 +1,11 @@
 export default defineNuxtConfig({
   // ssr: false,
-  runtimeConfig: {},
+  runtimeConfig: {
+    public: {
+      baseURL: 'https://bazi-back.netall.live/'
+    }
+  },
+  plugins: ['@/plugins/fetch-client.js'],
   css: ['@/assets/css/app.scss', '@/assets/css/colors.scss'],
   modules: [
     'nuxt-quasar-ui'

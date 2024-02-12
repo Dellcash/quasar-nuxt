@@ -15,7 +15,8 @@ export const useApi = () => {
     }
 
     try {
-      const response = await $fetch(url, options);
+      const response = await nuxtApp.$fetch(url, options);
+
       return response;
     } catch (error) {
       if ([401, 403, 404, 400, 406].includes(error.response?.status)) {

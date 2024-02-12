@@ -1,5 +1,6 @@
 <script setup>
 import Background from '/assets/auth-background.png'
+import { API_URL_AUTH } from '../services/apiEndpoints'
 
 definePageMeta({ layout: 'login-layout' })
 
@@ -13,8 +14,7 @@ const form = ref({
 
 const login = async () => {
   loading.value = true
-
-  await useApi()('https://bazi-back.netall.live/api/auth/backoffice/login', {
+  await useApi()(API_URL_AUTH.login, {
     method: 'POST',
     body: new URLSearchParams(form.value)
   })

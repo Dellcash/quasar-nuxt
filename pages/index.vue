@@ -1,5 +1,6 @@
 <script setup>
 definePageMeta({ layout: 'main-layout' })
+import { API_URL_USERS } from '../services/apiEndpoints'
 
 const nuxtApp = useNuxtApp()
 
@@ -9,7 +10,7 @@ const logout = () => {
 }
 
 const usersList = () => {
-  useApi()('https://bazi-back.netall.live/api/backoffice/users?offset=0&limit=15&filled_profile=true&mobile_number=&play_house_name=&sort=ASC')
+  useApi()(API_URL_USERS.usersList)
     .then(res => {
       console.log('resssssss', res);
     })
