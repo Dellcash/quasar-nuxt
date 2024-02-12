@@ -13,21 +13,20 @@ const form = ref({
 
 const login = async () => {
   loading.value = true
-  const customFetch = nuxtApp.$useCustomFetch()
 
-  try {
-    const response = await customFetch('https://bazi-back.netall.live/api/auth/backoffice/login', {
-      method: 'POST',
-      body: new URLSearchParams({ username: form.value.username, password: form.value.password })
+  await useApi()('https://bazi-back.netall.live/api/auth/backoffice/login', {
+    method: 'POST',
+    body: new URLSearchParams(form.value)
+  })
+    .then(res => {
+      loading.value = false
+
+      localStorage.setItem('token', res.access_token)
+      nuxtApp.$router.push('/')
     })
-
-    localStorage.setItem('token', response.access_token)
-    nuxtApp.$router.push('/')
-  } catch (err) {
-    console.log('errrrrror', err)
-  } finally {
-    loading.value = false
-  }
+    .catch(() => {
+      loading.value = false
+    })
 }
 </script>
 
@@ -43,7 +42,6 @@ const login = async () => {
             @submit.prevent="login"
             class="q-gutter-y-md"
           >
-
             <div>
               <label class="text-black">نام کاربری</label>
               <q-input

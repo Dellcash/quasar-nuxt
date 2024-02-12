@@ -1,15 +1,17 @@
 export default defineNuxtConfig({
   // ssr: false,
+  runtimeConfig: {},
   css: ['@/assets/css/app.scss', '@/assets/css/colors.scss'],
   modules: [
     'nuxt-quasar-ui'
   ],
-  runtimeConfig: {
-    baseURL: 'https://bazi-back.netall.live/api',
+  postcss: {
+    plugins: {
+      'postcss-rtlcss': {}
+    }
   },
   quasar: {
-
-    // lang: 'fa-IR',
+    lang: 'fa-IR',
     iconSet: 'svg-material-icons-round',
     sassVariables: '@/assets/css/quasar.variables.scss',
     plugins: [
