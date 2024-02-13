@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   // ssr: false,
   runtimeConfig: {
     public: {
-      baseURL: 'https://bazi-back.netall.live/'
+      baseURL: 'https://bazi-back.netall.live/api/'
     }
   },
   plugins: ['@/plugins/fetch-client.js', '@/plugins/services'],
