@@ -1,6 +1,6 @@
 <script setup>
 import Background from '/assets/auth-background.png'
-import { API_URL_AUTH } from '../services/apiEndpoints'
+import { authService } from '/services'
 
 definePageMeta({ layout: 'login-layout' })
 
@@ -14,19 +14,13 @@ const form = ref({
 
 const login = async () => {
   loading.value = true
-  await useApi()(API_URL_AUTH.login, {
-    method: 'POST',
-    body: new URLSearchParams(form.value)
-  })
+  authService.login(form.value)
     .then(res => {
       loading.value = false
 
       localStorage.setItem('token', res.access_token)
       nuxtApp.$router.push('/')
-    })
-    .catch(() => {
-      loading.value = false
-    })
+    }).catch(() => loading.value = false)
 }
 </script>
 

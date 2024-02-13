@@ -1,6 +1,7 @@
 <script setup>
+import { usersService } from '/services'
+
 definePageMeta({ layout: 'main-layout' })
-import { API_URL_USERS } from '../services/apiEndpoints'
 
 const nuxtApp = useNuxtApp()
 
@@ -10,7 +11,7 @@ const logout = () => {
 }
 
 const usersList = () => {
-  useApi()(API_URL_USERS.usersList)
+  usersService.fetchUsers()
     .then(res => {
       console.log('resssssss', res);
     })
