@@ -5,7 +5,7 @@ export default defineNuxtConfig({
       baseURL: 'https://bazi-back.netall.live/'
     }
   },
-  plugins: ['@/plugins/fetch-client.js'],
+  plugins: ['@/plugins/fetch-client.js', '@/plugins/services'],
   css: ['@/assets/css/app.scss', '@/assets/css/colors.scss'],
   modules: [
     'nuxt-quasar-ui'

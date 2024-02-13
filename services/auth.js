@@ -6,5 +6,9 @@ export const authService = {
       method: 'POST',
       body: new URLSearchParams(form)
     })
+  },
+  logOut() {
+    localStorage.clear()
+    useNuxtApp().$router.push('/login')
   }
 }

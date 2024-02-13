@@ -1,17 +1,8 @@
 <script setup>
-import { usersService } from '/services'
-
 definePageMeta({ layout: 'main-layout' })
 
-const nuxtApp = useNuxtApp()
-
-const logout = () => {
-  localStorage.clear()
-  nuxtApp.$router.push('/login')
-}
-
 const usersList = () => {
-  usersService.fetchUsers()
+  useServices().users.fetchUsers()
     .then(res => {
       console.log('resssssss', res);
     })
@@ -27,7 +18,7 @@ usersList()
 
     <q-btn
       label="logout"
-      @click="logout"
+      @click="useServices().auth.logOut"
     />
   </div>
 </template>

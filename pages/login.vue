@@ -1,6 +1,5 @@
 <script setup>
 import Background from '/assets/auth-background.png'
-import { authService } from '/services'
 
 definePageMeta({ layout: 'login-layout' })
 
@@ -14,7 +13,7 @@ const form = ref({
 
 const login = async () => {
   loading.value = true
-  authService.login(form.value)
+  useServices().auth.login(form.value)
     .then(res => {
       loading.value = false
 
