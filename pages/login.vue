@@ -1,5 +1,5 @@
 <script setup>
-import Background from '/assets/auth-background.png'
+import Background from '~/assets/auth-background.png'
 
 definePageMeta({ layout: 'login-layout' })
 
@@ -19,7 +19,9 @@ const login = async () => {
 
       localStorage.setItem('token', res.access_token)
       nuxtApp.$router.push('/users-management')
-    }).catch(() => loading.value = false)
+    }).catch(() => {
+      loading.value = false
+    })
 }
 </script>
 
@@ -28,15 +30,21 @@ const login = async () => {
     :src="Background"
     height="100vh"
   >
-    <div class="fit row items-center justify-center container no-padding">
-      <q-card class="card-width">
+    <div
+      class="fit row items-center justify-center container no-padding"
+    >
+      <q-card
+        class="card-width"
+      >
         <q-card-section>
           <q-form
-            @submit.prevent="login"
             class="q-gutter-y-md"
+            @submit.prevent="login"
           >
             <div>
-              <label class="text-black">نام کاربری</label>
+              <label
+                class="text-black"
+              >نام کاربری</label>
               <q-input
                 v-model="form.username"
                 dense
@@ -49,7 +57,9 @@ const login = async () => {
             </div>
 
             <div>
-              <label class="text-black">رمز عبور</label>
+              <label
+                class="text-black"
+              >رمز عبور</label>
               <q-input
                 v-model="form.password"
                 dense

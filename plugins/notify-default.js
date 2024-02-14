@@ -47,7 +47,7 @@ Notify.registerType('error', notificationTypes.error)
 Notify.registerType('alert', notificationTypes.alert)
 Notify.registerType('notic', notificationTypes.notic)
 
-export default function useNotif() {
+export default function useNotif () {
   const $notify = (type, message, options, position = 'top') => {
     const notificationOptions = notificationTypes[type]
 

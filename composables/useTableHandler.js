@@ -41,7 +41,7 @@ export const useTableHandler = ({ url, params = {} }) => {
     pagination.value.descending = descending
   }
 
-  function request() {
+  function request () {
     tableRef.value.requestServerInteraction()
   }
 

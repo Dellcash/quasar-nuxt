@@ -1,6 +1,6 @@
 import { useQuasar } from 'quasar'
 
-export function useDialog() {
+export function useDialog () {
   const $q = useQuasar()
 
   const loadDialog = async (dialogComponentPath, componentData) => {

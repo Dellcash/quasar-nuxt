@@ -1,14 +1,19 @@
+import eslintPlugin from 'vite-plugin-eslint'
+
 export default defineNuxtConfig({
-  // ssr: false,
   runtimeConfig: {
     public: {
       baseURL: 'https://bazi-back.netall.live/api/'
     }
   },
-  plugins: ['@/plugins/fetch-client.js', '@/plugins/services'],
+  vite: {
+    plugins: [eslintPlugin()]
+  },
+  plugins: ['@/plugins/fetch-client.js', '@/plugins/services', '@/plugins/dayjs.js'],
   css: ['@/assets/css/app.scss', '@/assets/css/colors.scss'],
   modules: [
-    'nuxt-quasar-ui'
+    'nuxt-quasar-ui',
+    '@nuxtjs/eslint-module'
   ],
   postcss: {
     plugins: {
@@ -25,17 +30,17 @@ export default defineNuxtConfig({
       'Loading',
       'LoadingBar',
       'Notify',
-      'Dark',
+      'Dark'
     ],
     extras: {
-      font: 'roboto-font',
+      font: 'roboto-font'
     },
     components: {
       defaults: {
         QBtn: {
-          unelevated: true,
-        },
-      },
-    },
-  },
+          unelevated: true
+        }
+      }
+    }
+  }
 })

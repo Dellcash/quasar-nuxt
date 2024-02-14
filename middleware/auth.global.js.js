@@ -1,15 +1,13 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  const isLoggedIn = !!localStorage.getItem('token');
+export default defineNuxtRouteMiddleware((to) => {
+  const isLoggedIn = !!localStorage.getItem('token')
 
-  const isLoginPage = to.path === '/login';
+  const isLoginPage = to.path === '/login'
 
   if (!isLoggedIn && !isLoginPage) {
-    return navigateTo('/login');
+    return navigateTo('/login')
   }
 
   if (isLoggedIn && isLoginPage) {
-    return navigateTo('/');
+    return navigateTo('/')
   }
-});
-
-
+})
