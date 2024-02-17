@@ -1,4 +1,5 @@
 <script setup>
+import { LocalStorage } from 'quasar'
 import Background from '~/assets/auth-background.png'
 
 definePageMeta({ layout: 'login-layout' })
@@ -17,7 +18,7 @@ const login = async () => {
     .then(res => {
       loading.value = false
 
-      localStorage.setItem('token', res.access_token)
+      LocalStorage.set('token', res.access_token)
       nuxtApp.$router.push('/users/management')
     }).catch(() => {
       loading.value = false

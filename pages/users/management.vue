@@ -145,7 +145,6 @@ const cityOptionFilter = ref([])
 const provincesList = () => {
   useServices().users.fetchProvinces()
     .then(res => {
-      console.log('ressss', res)
       res.forEach(item => item.cities.forEach(city => {
         cityOption.value.push({
           label: city.name,
