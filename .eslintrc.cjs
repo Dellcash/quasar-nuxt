@@ -45,7 +45,7 @@ module.exports = {
     }],
     'vue/first-attribute-linebreak': ['error', {
       singleline: 'below',
-      multiline: 'below'
+      multiline: 'beside'
     }],
     'vue/max-attributes-per-line': ['error', {
       singleline: {

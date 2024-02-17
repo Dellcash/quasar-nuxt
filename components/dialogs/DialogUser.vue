@@ -16,14 +16,12 @@ defineProps({
 </script>
 
 <template>
-  <q-dialog
-    ref="dialogRef"
-    persistent
-    @hide="onDialogHide"
+  <q-dialog ref="dialogRef"
+            persistent
+            @hide="onDialogHide"
   >
-    <q-card
-      bordered
-      flat
+    <q-card bordered
+            flat
     >
       <q-card-section
         class="row items-center justify-between no-padding q-ma-md"
@@ -34,22 +32,20 @@ defineProps({
           جزئیات خانه بازی
         </div>
 
-        <q-btn
-          v-close-popup
-          flat
-          :icon="roundClose"
-          round
-          dense
+        <q-btn v-close-popup
+               flat
+               :icon="roundClose"
+               round
+               dense
         />
       </q-card-section>
 
       <q-card-section
         class="row"
       >
-        <q-card
-          flat
-          bordered
-          class="bg-white-2 text-dark"
+        <q-card flat
+                bordered
+                class="bg-white-2 text-dark"
         >
           <q-card-section
             class="row justify-between items-center"
@@ -76,18 +72,16 @@ defineProps({
               <div
                 class="row justify-end q-mb-lg"
               >
-                <q-chip
-                  square
-                  label="پرداخت نشده"
-                  text-color="error"
-                  color="on-error"
+                <q-chip square
+                        label="پرداخت نشده"
+                        text-color="error"
+                        color="on-error"
                 />
 
-                <q-chip
-                  square
-                  label="پرداخت شده"
-                  text-color="success"
-                  color="on-success"
+                <q-chip square
+                        label="پرداخت شده"
+                        text-color="success"
+                        color="on-success"
                 />
               </div>
 

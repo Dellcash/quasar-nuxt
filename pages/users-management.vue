@@ -2,7 +2,6 @@
 import { API_URL_USERS } from '~/services'
 import { roundPhoneIphone, roundSearch } from '@quasar/extras/material-icons-round'
 
-const nuxtApp = useNuxtApp()
 const { $dayjs } = useNuxtApp()
 
 const sortOption = [
@@ -185,8 +184,6 @@ const openDialog = () => {
     details: details.value
   })
 }
-
-console.log('nuxtttt', nuxtApp)
 </script>
 
 <template>
@@ -199,14 +196,12 @@ console.log('nuxtttt', nuxtApp)
       لیست مشتریان
     </div>
 
-    <q-card
-      bordered
-      flat
-      class="border-radius-8"
+    <q-card bordered
+            flat
+            class="border-radius-8"
     >
-      <q-form
-        class="q-pa-md q-col-gutter-md"
-        @submit.prevent=""
+      <q-form class="q-pa-md q-col-gutter-md"
+              @submit.prevent=""
       >
         <div
           class="col row q-col-gutter-md"
@@ -215,13 +210,12 @@ console.log('nuxtttt', nuxtApp)
             class="col-12 col-sm-4 q-gutter-y-xs"
           >
             <div>شماره موبایل</div>
-            <q-input
-              v-model="filter.mobile_number"
-              outlined
-              dense
-              type="number"
-              placeholder="شماره موبایل مشتری"
-              class="col-12 col-sm-4"
+            <q-input v-model="filter.mobile_number"
+                     outlined
+                     dense
+                     type="number"
+                     placeholder="شماره موبایل مشتری"
+                     class="col-12 col-sm-4"
             >
               <template
                 #append
@@ -237,18 +231,17 @@ console.log('nuxtttt', nuxtApp)
             class="col-12 col-sm-4 q-gutter-y-xs"
           >
             <div>شهر</div>
-            <q-select
-              v-model="filter.city_id"
-              :options="cityOption"
-              outlined
-              dense
-              emit-value
-              use-input
-              no-error-icon
-              hide-bottom-space
-              map-options
-              label="شهر مورد نظر را انتخاب کنید"
-              @filter="filterFn"
+            <q-select v-model="filter.city_id"
+                      :options="cityOption"
+                      outlined
+                      dense
+                      emit-value
+                      use-input
+                      no-error-icon
+                      hide-bottom-space
+                      map-options
+                      label="شهر مورد نظر را انتخاب کنید"
+                      @filter="filterFn"
             >
               <template
                 #no-option
@@ -266,13 +259,12 @@ console.log('nuxtttt', nuxtApp)
             class="col-12 col-sm-4 q-gutter-y-xs"
           >
             <div>مرتب سازی</div>
-            <q-select
-              v-model="filter.sort"
-              outlined
-              dense
-              :options="sortOption"
-              emit-value
-              map-options
+            <q-select v-model="filter.sort"
+                      outlined
+                      dense
+                      :options="sortOption"
+                      emit-value
+                      map-options
             />
           </div>
         </div>
@@ -280,12 +272,11 @@ console.log('nuxtttt', nuxtApp)
         <div
           class="row justify-between q-col-gutter-md"
         >
-          <q-input
-            v-model="filter.play_house_name"
-            outlined
-            dense
-            placeholder="جستجو براساس نام خانه بازی"
-            class="col-xs-12 col-sm-8 text-red"
+          <q-input v-model="filter.play_house_name"
+                   outlined
+                   dense
+                   placeholder="جستجو براساس نام خانه بازی"
+                   class="col-xs-12 col-sm-8 text-red"
           >
             <template
               #append
@@ -299,38 +290,35 @@ console.log('nuxtttt', nuxtApp)
           <div
             class="q-gutter-sm row items-center col-xs-12 col-sm-auto"
           >
-            <q-btn
-              label="پاک کردن"
-              color="primary"
-              outline
-              flat
-              class="col-xs-12 col-sm-auto"
-              @click="clearFilter"
+            <q-btn label="پاک کردن"
+                   color="primary"
+                   outline
+                   flat
+                   class="col-xs-12 col-sm-auto"
+                   @click="clearFilter"
             />
 
-            <q-btn
-              label="فیلتر"
-              color="primary"
-              class="col-xs-12 col-sm-auto"
-              :icon="roundFilterAlt"
-              @click="filterTable"
+            <q-btn label="فیلتر"
+                   color="primary"
+                   class="col-xs-12 col-sm-auto"
+                   :icon="roundFilterAlt"
+                   @click="filterTable"
             />
           </div>
         </div>
       </q-form>
     </q-card>
 
-    <q-table
-      ref="tableRef"
-      v-model:pagination="pagination"
-      flat
-      bordered
-      class="q-mt-lg border-radius-8"
-      :columns="columns"
-      :rows="rows"
-      row-key="index"
-      :loading="loading"
-      @request="onRequest"
+    <q-table ref="tableRef"
+             v-model:pagination="pagination"
+             flat
+             bordered
+             class="q-mt-lg border-radius-8"
+             :columns="columns"
+             :rows="rows"
+             row-key="index"
+             :loading="loading"
+             @request="onRequest"
     >
       <template
         #body-cell-index="props"
@@ -348,12 +336,11 @@ console.log('nuxtttt', nuxtApp)
         <td
           :props="props"
         >
-          <q-btn
-            label="جزئیات"
-            flat
-            color="primary"
-            class="text-weight-bold"
-            @click="openDialog(details = props.row)"
+          <q-btn label="جزئیات"
+                 flat
+                 color="primary"
+                 class="text-weight-bold"
+                 @click="openDialog(details = props.row)"
           />
         </td>
       </template>
@@ -364,20 +351,18 @@ console.log('nuxtttt', nuxtApp)
         <td
           :props="props"
         >
-          <q-chip
-            v-if="$dayjs.unix(props.row.account_info.expiration_date).isBefore($dayjs()) || null"
-            square
-            label="پرداخت نشده"
-            text-color="error"
-            color="on-error"
+          <q-chip v-if="$dayjs.unix(props.row.account_info.expiration_date).isBefore($dayjs()) || null"
+                  square
+                  label="پرداخت نشده"
+                  text-color="error"
+                  color="on-error"
           />
 
-          <q-chip
-            v-else
-            square
-            label="پرداخت شده"
-            text-color="success"
-            color="on-success"
+          <q-chip v-else
+                  square
+                  label="پرداخت شده"
+                  text-color="success"
+                  color="on-success"
           />
         </td>
       </template>
