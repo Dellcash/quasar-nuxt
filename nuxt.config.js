@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [eslintPlugin()]
   },
-  plugins: ['@/plugins/fetch-client.js', '@/plugins/services', '@/plugins/dayjs.js', '@/plugins/notify-default.js'],
+  plugins: ['@/plugins/fetch-client.js', '@/plugins/services.js', '@/plugins/dayjs.js', '@/plugins/notify-default.js'],
   css: ['@/assets/css/app.scss', '@/assets/css/colors.scss'],
   modules: [
     'nuxt-quasar-ui',
