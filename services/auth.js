@@ -1,4 +1,5 @@
 import { API_URL_AUTH } from '.'
+import { LocalStorage } from 'quasar'
 
 export const authService = {
   async login (form) {
@@ -8,7 +9,7 @@ export const authService = {
     })
   },
   logOut () {
-    localStorage.clear()
+    LocalStorage.clear()
     useNuxtApp().$router.push('/login')
   }
 }

@@ -1,6 +1,9 @@
 import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
+  router: {
+    middleware: ['auth.global']
+  },
   runtimeConfig: {
     public: {
       baseURL: 'https://bazi-back.netall.live/api/'

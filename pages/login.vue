@@ -18,7 +18,7 @@ const login = async () => {
       loading.value = false
 
       localStorage.setItem('token', res.access_token)
-      nuxtApp.$router.push('/users-management')
+      nuxtApp.$router.push('/users/management')
     }).catch(() => {
       loading.value = false
     })

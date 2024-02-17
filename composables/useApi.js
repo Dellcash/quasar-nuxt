@@ -1,8 +1,10 @@
+import { LocalStorage } from 'quasar'
+
 export const useApi = () => {
   const nuxtApp = useNuxtApp()
 
   const getToken = () => {
-    return localStorage.getItem('token')
+    return LocalStorage.getItem('token')
   }
 
   return async (url, options = {}) => {
