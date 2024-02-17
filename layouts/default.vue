@@ -1,3 +1,79 @@
+<script setup>
+import Logo from '@/assets/logo.png'
+import { roundGroups, roundPersonAdd, roundLogout, roundMenu, roundNotifications, roundMailLock, roundSupportAgent } from '@quasar/extras/material-icons-round'
+
+const drawer = ref(false)
+const menus = ref([
+  {
+    label: 'لیست مشتریان',
+    icon: roundGroups,
+    to: { path: '/users/management' }
+  },
+  {
+    label: 'مدیریت حساب',
+    icon: roundPersonAdd
+  },
+  {
+    label: 'مدیریت پیامک ها',
+    icon: roundMailLock
+  },
+  {
+    to: '',
+    icon: roundNotifications,
+    label: 'اطلاعیه',
+    expand: false,
+    subMenu: [
+      {
+        label: 'اطلاع رسانی تمدید'
+      },
+      {
+        label: 'ایجاد اطلاعیه'
+      }
+    ]
+  },
+  {
+    to: { path: '/workshop/list' },
+    icon: roundNotifications,
+    label: 'آموزش',
+    expand: false,
+    subMenu: [
+      {
+        to: { path: '/workshop/create' },
+        label: 'ایجاد آموزش'
+      }
+    ]
+  },
+  {
+    to: '',
+    icon: roundSupportAgent,
+    label: 'پشتیبانی',
+    expand: false,
+    subMenu: [
+      {
+        label: 'لیست تیکت‌ها'
+      }
+    ]
+  },
+  {
+    label: 'خروج',
+    icon: roundLogout,
+    function: () => { useServices().auth.logOut() }
+  }
+])
+
+const { $dayjs } = useNuxtApp()
+const time = ref(toPersianNumber($dayjs().format('HH:mm')))
+const date = ref(datetimeToJalali($dayjs(), 'YYYY/MM/DD'))
+onMounted(() => {
+  setInterval(() => {
+    time.value = toPersianNumber($dayjs().format('HH:mm'))
+  }, 1000)
+})
+
+const { currentRoute } = useRouter()
+console.log('currentRoute', currentRoute.value)
+</script>
+
 <template>
   <q-layout view="lHh Lpr lFf"
             class="bg-light"
@@ -37,7 +113,7 @@
       <div
         class="row items-center justify-center q-my-md"
       >
-        <q-img src="~/assets/cover.png"
+        <q-img :src="Logo"
                width="172px"
                height="60px"
                fit="fill"
@@ -123,86 +199,6 @@
     </q-page-container>
   </q-layout>
 </template>
-
-<script setup>
-import { roundGroups, roundPersonAdd, roundLogout, roundMenu, roundNotifications, roundMailLock, roundSupportAgent } from '@quasar/extras/material-icons-round'
-
-const drawer = ref(false)
-const menus = ref([
-  {
-    label: 'لیست مشتریان',
-    icon: roundGroups,
-    to: { name: 'Customers' }
-  },
-  {
-    label: 'مدیریت حساب',
-    icon: roundPersonAdd,
-    to: { name: 'AccMangement' }
-  },
-  {
-    label: 'مدیریت پیامک ها',
-    icon: roundMailLock,
-    to: { name: 'SmsManagement' }
-  },
-  {
-    to: '',
-    icon: roundNotifications,
-    label: 'اطلاعیه',
-    expand: false,
-    subMenu: [
-      {
-        to: { name: 'Announcement' },
-        label: 'اطلاع رسانی تمدید'
-      },
-      {
-        to: { name: 'Notification' },
-        label: 'ایجاد اطلاعیه'
-      }
-    ]
-  },
-  {
-    to: { name: 'WorkshopsList' },
-    icon: roundNotifications,
-    label: 'آموزش',
-    expand: false,
-    subMenu: [
-      {
-        to: { name: 'CreateWorkshop' },
-        label: 'ایجاد آموزش'
-      }
-    ]
-  },
-  {
-    to: '',
-    icon: roundSupportAgent,
-    label: 'پشتیبانی',
-    expand: false,
-    subMenu: [
-      {
-        to: { name: 'TicketList' },
-        label: 'لیست تیکت‌ها'
-      }
-    ]
-  },
-  {
-    label: 'خروج',
-    icon: roundLogout,
-    function: () => {
-      appStore.logOut()
-      router.push({ name: 'Login' })
-    }
-  }
-])
-
-const { $dayjs } = useNuxtApp()
-const time = ref(toPersianNumber($dayjs().format('HH:mm')))
-const date = ref(datetimeToJalali($dayjs(), 'YYYY/MM/DD'))
-onMounted(() => {
-  setInterval(() => {
-    time.value = toPersianNumber($dayjs().format('HH:mm'))
-  }, 1000)
-})
-</script>
 
 <style lang="scss" scoped>
 .q-item.q-router-link--active,

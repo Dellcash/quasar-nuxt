@@ -193,9 +193,6 @@ const openDialog = () => {
       class="q-mb-md flex items-center text-primary-1 text-h6 q-gutter-x-sm"
     >
       لیست مشتریان
-      <q-btn label="خروج"
-             @click="useServices().auth.logOut()"
-      />
     </div>
 
     <q-card bordered
