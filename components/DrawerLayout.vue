@@ -1,3 +1,80 @@
+<script setup>
+import Logo from 'assets/logo.png'
+import {
+  roundGroups,
+  roundPersonAdd,
+  roundLogout,
+  roundNotifications,
+  roundMailLock,
+  roundSupportAgent
+} from '@quasar/extras/material-icons-round'
+
+const drawer = ref(false)
+const route = useRoute()
+
+const menus = ref([
+  {
+    label: 'لیست مشتریان',
+    icon: roundGroups,
+    to: { path: '/users/management' }
+  },
+  {
+    label: 'مدیریت حساب',
+    icon: roundPersonAdd
+  },
+  {
+    label: 'مدیریت پیامک ها',
+    icon: roundMailLock
+  },
+  {
+    to: '',
+    icon: roundNotifications,
+    label: 'اطلاعیه',
+    expand: false,
+    subMenu: [
+      {
+        label: 'اطلاع رسانی تمدید'
+      },
+      {
+        label: 'ایجاد اطلاعیه'
+      }
+    ]
+  },
+  {
+    to: { path: '/workshop/list' },
+    icon: roundNotifications,
+    label: 'آموزش',
+    expand: false,
+    subMenu: [
+      {
+        to: { path: '/workshop/create' },
+        label: 'ایجاد آموزش'
+      }
+    ]
+  },
+  {
+    to: '',
+    icon: roundSupportAgent,
+    label: 'پشتیبانی',
+    expand: false,
+    subMenu: [
+      {
+        label: 'لیست تیکت‌ها'
+      }
+    ]
+  },
+  {
+    label: 'خروج',
+    icon: roundLogout,
+    function: () => { useServices().auth.logOut() }
+  }
+])
+
+const isRouteActive = (to) => {
+  return route.path === to?.path
+}
+</script>
+
 <template>
   <q-drawer v-model="drawer"
             class="bg-light"
@@ -82,83 +159,6 @@
     </q-list>
   </q-drawer>
 </template>
-
-<script setup>
-import {
-  roundGroups,
-  roundPersonAdd,
-  roundLogout,
-  roundNotifications,
-  roundMailLock,
-  roundSupportAgent
-} from '@quasar/extras/material-icons-round'
-
-const Logo = '@/assets/logo.png' // Adjust the path to your logo
-const drawer = ref(false)
-const route = useRoute()
-
-const menus = ref([
-  {
-    label: 'لیست مشتریان',
-    icon: roundGroups,
-    to: { path: '/users/management' }
-  },
-  {
-    label: 'مدیریت حساب',
-    icon: roundPersonAdd
-  },
-  {
-    label: 'مدیریت پیامک ها',
-    icon: roundMailLock
-  },
-  {
-    to: '',
-    icon: roundNotifications,
-    label: 'اطلاعیه',
-    expand: false,
-    subMenu: [
-      {
-        label: 'اطلاع رسانی تمدید'
-      },
-      {
-        label: 'ایجاد اطلاعیه'
-      }
-    ]
-  },
-  {
-    to: { path: '/workshop/list' },
-    icon: roundNotifications,
-    label: 'آموزش',
-    expand: false,
-    subMenu: [
-      {
-        to: { path: '/workshop/create' },
-        label: 'ایجاد آموزش'
-      }
-    ]
-  },
-  {
-    to: '',
-    icon: roundSupportAgent,
-    label: 'پشتیبانی',
-    expand: false,
-    subMenu: [
-      {
-        label: 'لیست تیکت‌ها'
-      }
-    ]
-  },
-  {
-    label: 'خروج',
-    icon: roundLogout,
-    function: () => { useServices().auth.logOut() }
-  }
-])
-
-const isRouteActive = (to) => {
-  return route.path === to?.path
-}
-</script>
 
 <style lang="scss" scoped>
 .active-route, .q-item.q-router-link--active, .q-item--active {
