@@ -16,11 +16,10 @@ const login = async () => {
   loading.value = true
   useServices().auth.login(form.value)
     .then(res => {
-      loading.value = false
-
       LocalStorage.set('token', res.access_token)
       nuxtApp.$router.push('/users/management')
-    }).catch(() => {
+    }).catch((err) => console.log(err))
+    .finally(() => {
       loading.value = false
     })
 }

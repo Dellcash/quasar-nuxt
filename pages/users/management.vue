@@ -4,184 +4,211 @@ import { roundFilterAlt, roundPhoneIphone, roundSearch } from '@quasar/extras/ma
 
 const { $dayjs } = useNuxtApp()
 
-const sortOption = [
-  {
-    label: 'بیشترین درآمد',
-    value: 'HIGHEST_INCOME'
-  },
-  {
-    label: 'کمترین درآمد',
-    value: 'LOWEST_INCOME'
-  },
-  {
-    label: 'بیشترین حساب',
-    value: 'MOST_ACCOUNT'
-  },
-  {
-    label: 'کمترین حساب',
-    value: 'LOWEST_ACCOUNT'
-  },
-  {
-    label: 'آخرین حساب ایجاد شده',
-    value: 'ASC'
-  }
-]
-const columns = [
-  {
-    name: 'index',
-    label: 'ردیف',
-    align: 'left',
-    field: 'id',
-    headerStyle: 'font-size:16px'
-  },
-  {
-    name: 'profile',
-    label: 'نام خانه بازی',
-    align: 'left',
-    field: row => row.profile.play_house_name,
-    headerStyle: 'font-size:16px'
-  },
-  {
-    name: 'city_name',
-    label: 'شهر',
-    align: 'left',
-    field: row => row.profile.location.city.name,
-    headerStyle: 'font-size:16px'
-  },
-  {
-    name: 'province_name',
-    label: 'استان',
-    align: 'left',
-    field: row => row.profile.location.province.name,
-    headerStyle: 'font-size:16px'
-  },
-  {
-    name: 'mobile_number',
-    label: 'شماره موبایل',
-    align: 'left',
-    field: val => toPersianNumber(val.mobile_number),
-    headerStyle: 'font-size:16px'
-  },
-  {
-    name: 'participant_count',
-    label: 'تعداد حساب',
-    align: 'left',
-    field: val => toPersianNumber(val.participant_count),
-    headerStyle: 'font-size:16px'
-  },
-  {
-    name: 'total_income',
-    label: 'مجموع درآمد(تومان)',
-    align: 'left',
-    field: val => seperateNumber(toPersianNumber(Math.trunc(val.total_income / 10))),
-    headerStyle: 'font-size:16px'
-  },
-  {
-    name: 'expiration_date',
-    label: 'وضعیت',
-    align: 'left',
-    field: row => row.account_info.expiration_date,
-    headerStyle: 'font-size:16px'
-  },
-  {
-    name: 'action',
-    align: 'left',
-    field: 'action',
-    headerStyle: 'font-size:16px'
-  }
-]
-
-const {
-  rows,
-  filter,
-  request,
-  loading,
-  tableRef,
-  onRequest,
-  pagination
-} = useTableHandler({
+const { columns, sortOption } = useTable()
+const { details, openDialog } = useLoadDialog()
+const { cityOption, cityOptionFilter, provincesList } = useCity()
+const { rows, filter, request, loading, tableRef, onRequest, pagination } = useTableHandler({
   url: API_URL_USERS.usersList,
   params: {
     filled_profile: true
   }
 })
+const { filterTable, clearFilter, filterFn } = useFilter()
 
-onMounted(() => {
+onMounted(async () => {
+  await provincesList()
   if (!filter.value.city_id) delete filter.value.city_id
-  request()
+  await request()
 })
 
-filter.value = ({
-  city_id: null,
-  mobile_number: '',
-  play_house_name: '',
-  sort: 'ASC'
-})
-
-const filterTable = () => {
-  request({
-    params: {
-      city_id: filter.value.city_id,
-      mobile_number: filter.value.mobile_number,
-      play_house_name: filter.value.play_house_name
+function useTable () {
+  const sortOption = [
+    {
+      label: 'بیشترین درآمد',
+      value: 'HIGHEST_INCOME'
+    },
+    {
+      label: 'کمترین درآمد',
+      value: 'LOWEST_INCOME'
+    },
+    {
+      label: 'بیشترین حساب',
+      value: 'MOST_ACCOUNT'
+    },
+    {
+      label: 'کمترین حساب',
+      value: 'LOWEST_ACCOUNT'
+    },
+    {
+      label: 'آخرین حساب ایجاد شده',
+      value: 'ASC'
     }
-  })
-}
-const clearFilter = () => {
-  filter.value = {
-    mobile_number: '',
-    play_house_name: ''
+  ]
+  const columns = [
+    {
+      name: 'index',
+      label: 'ردیف',
+      align: 'left',
+      field: 'id',
+      headerStyle: 'font-size:16px'
+    },
+    {
+      name: 'profile',
+      label: 'نام خانه بازی',
+      align: 'left',
+      field: row => row.profile.play_house_name,
+      headerStyle: 'font-size:16px'
+    },
+    {
+      name: 'city_name',
+      label: 'شهر',
+      align: 'left',
+      field: row => row.profile.location.city.name,
+      headerStyle: 'font-size:16px'
+    },
+    {
+      name: 'province_name',
+      label: 'استان',
+      align: 'left',
+      field: row => row.profile.location.province.name,
+      headerStyle: 'font-size:16px'
+    },
+    {
+      name: 'mobile_number',
+      label: 'شماره موبایل',
+      align: 'left',
+      field: val => toPersianNumber(val.mobile_number),
+      headerStyle: 'font-size:16px'
+    },
+    {
+      name: 'participant_count',
+      label: 'تعداد حساب',
+      align: 'left',
+      field: val => toPersianNumber(val.participant_count),
+      headerStyle: 'font-size:16px'
+    },
+    {
+      name: 'total_income',
+      label: 'مجموع درآمد(تومان)',
+      align: 'left',
+      field: val => seperateNumber(toPersianNumber(Math.trunc(val.total_income / 10))),
+      headerStyle: 'font-size:16px'
+    },
+    {
+      name: 'expiration_date',
+      label: 'وضعیت',
+      align: 'left',
+      field: row => row.account_info.expiration_date,
+      headerStyle: 'font-size:16px'
+    },
+    {
+      name: 'action',
+      align: 'left',
+      field: 'action',
+      headerStyle: 'font-size:16px'
+    }
+  ]
+
+  return {
+    columns,
+    sortOption
   }
-  request({
-    params: {
+}
+
+function useFilter () {
+  filter.value = ({
+    city_id: null,
+    mobile_number: '',
+    play_house_name: '',
+    sort: 'ASC'
+  })
+
+  const filterTable = () => {
+    request({
+      params: {
+        city_id: filter.value.city_id,
+        mobile_number: filter.value.mobile_number,
+        play_house_name: filter.value.play_house_name
+      }
+    })
+  }
+
+  const clearFilter = () => {
+    filter.value = {
       mobile_number: '',
       play_house_name: ''
     }
-  })
-}
-
-const cityOption = ref([])
-const cityOptionFilter = ref([])
-const provincesList = () => {
-  useServices().users.fetchProvinces()
-    .then(res => {
-      res.forEach(item => item.cities.forEach(city => {
-        cityOption.value.push({
-          label: city.name,
-          value: city.city_id
-        })
-
-        cityOptionFilter.value.push({
-          label: city.name,
-          value: city.city_id
-        })
-      }))
-    }).catch(err => console.log(err))
-}
-provincesList()
-
-const filterFn = (val, update) => {
-  if (val === '') {
-    update(() => {
-      cityOption.value = cityOptionFilter.value
+    request({
+      params: {
+        mobile_number: '',
+        play_house_name: ''
+      }
     })
-    return
   }
 
-  update(() => {
-    const needle = val.toLowerCase()
-    // provincesList(needle)
-    cityOption.value = cityOptionFilter.value
-      .filter(v => v.label.toLowerCase().indexOf(needle) > -1)
-  })
+  const filterFn = (val, update) => {
+    if (val === '') {
+      update(() => {
+        cityOption.value = cityOptionFilter.value
+      })
+      return
+    }
+
+    update(() => {
+      const needle = val.toLowerCase()
+      cityOption.value = cityOptionFilter.value
+        .filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+    })
+  }
+
+  return {
+    filter,
+    filterFn,
+    clearFilter,
+    filterTable
+  }
 }
 
-const details = ref({})
-const { loadDialog } = useDialog()
-const openDialog = () => {
-  loadDialog(import('@/components/dialogs/DialogUser.vue'), {
-    details: details.value
-  })
+function useCity () {
+  const cityOption = ref([])
+  const cityOptionFilter = ref([])
+  const provincesList = () => {
+    useServices().users.fetchProvinces()
+      .then(res => {
+        res.forEach(item => item.cities.forEach(city => {
+          cityOption.value.push({
+            label: city.name,
+            value: city.city_id
+          })
+
+          cityOptionFilter.value.push({
+            label: city.name,
+            value: city.city_id
+          })
+        }))
+      }).catch(err => console.log(err))
+  }
+
+  return {
+    cityOption,
+    provincesList,
+    cityOptionFilter
+  }
+}
+
+function useLoadDialog () {
+  const details = ref({})
+  const { loadDialog } = useDialog()
+  const openDialog = () => {
+    loadDialog(import('@/components/dialogs/DialogUser.vue'), {
+      details: details.value
+    })
+  }
+
+  return {
+    details,
+    openDialog
+  }
 }
 </script>
 
@@ -231,6 +258,7 @@ const openDialog = () => {
           >
             <div>شهر</div>
             <q-select v-model="filter.city_id"
+                      :options="cityOption"
                       outlined
                       dense
                       emit-value
