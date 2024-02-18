@@ -231,7 +231,6 @@ const openDialog = () => {
           >
             <div>شهر</div>
             <q-select v-model="filter.city_id"
-                      :options="cityOption"
                       outlined
                       dense
                       emit-value

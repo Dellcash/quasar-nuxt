@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import Logo from '@/assets/logo.png'
 import { roundGroups, roundPersonAdd, roundLogout, roundMenu, roundNotifications, roundMailLock, roundSupportAgent } from '@quasar/extras/material-icons-round'
 
@@ -72,9 +72,9 @@ onMounted(() => {
 
 const { currentRoute } = useRouter()
 console.log('currentRoute', currentRoute.value)
-</script>
+</script> -->
 
-<template>
+<!-- <template>
   <q-layout view="lHh Lpr lFf"
             class="bg-light"
   >
@@ -198,9 +198,9 @@ console.log('currentRoute', currentRoute.value)
       <slot />
     </q-page-container>
   </q-layout>
-</template>
+</template> -->
 
-<style lang="scss" scoped>
+<!-- <style lang="scss" scoped>
 .q-item.q-router-link--active,
 .q-item--active {
   color: $light;
@@ -215,4 +215,56 @@ console.log('currentRoute', currentRoute.value)
 .q-item {
   border-radius: 0 8px 8px 0px;
 }
-</style>
+</style> -->
+
+<script setup>
+import { roundMenu } from '@quasar/extras/material-icons-round'
+
+const drawer = ref(false)
+
+const { $dayjs } = useNuxtApp()
+const time = ref(toPersianNumber($dayjs().format('HH:mm')))
+const date = ref(datetimeToJalali($dayjs(), 'YYYY/MM/DD'))
+onMounted(() => {
+  setInterval(() => {
+    time.value = toPersianNumber($dayjs().format('HH:mm'))
+  }, 1000)
+})
+</script>
+
+<template>
+  <q-layout view="lHh Lpr lFf"
+            class="bg-light"
+  >
+    <q-header>
+      <q-toolbar
+        class="bg-light text-black row justify-between"
+      >
+        <q-btn flat
+               round
+               class="drawer"
+               dense
+               :icon="roundMenu"
+               @click="drawer = !drawer"
+        />
+
+        <div
+          class="row items-center q-col-gutter-x-sm text-body3"
+        >
+          <div>
+            {{ date }}
+          </div>
+          <div>
+            ,{{ time }}
+          </div>
+        </div>
+      </q-toolbar>
+    </q-header>
+
+    <DrawerLayout />
+
+    <q-page-container>
+      <slot />
+    </q-page-container>
+  </q-layout>
+</template>
