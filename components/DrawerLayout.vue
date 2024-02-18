@@ -2,76 +2,55 @@
 import Logo from 'assets/logo.png'
 import {
   roundGroups,
-  roundPersonAdd,
   roundLogout,
   roundNotifications,
-  roundMailLock,
-  roundSupportAgent
+  roundPersonAdd
 } from '@quasar/extras/material-icons-round'
 
-const drawer = ref(false)
 const route = useRoute()
+const { drawer, menus, isRouteActive } = useDrawer()
 
-const menus = ref([
-  {
-    label: 'لیست مشتریان',
-    icon: roundGroups,
-    to: { path: '/users/management' }
-  },
-  {
-    label: 'مدیریت حساب',
-    icon: roundPersonAdd
-  },
-  {
-    label: 'مدیریت پیامک ها',
-    icon: roundMailLock
-  },
-  {
-    to: '',
-    icon: roundNotifications,
-    label: 'اطلاعیه',
-    expand: false,
-    subMenu: [
-      {
-        label: 'اطلاع رسانی تمدید'
-      },
-      {
-        label: 'ایجاد اطلاعیه'
-      }
-    ]
-  },
-  {
-    to: { path: '/workshop/list' },
-    icon: roundNotifications,
-    label: 'آموزش',
-    expand: false,
-    subMenu: [
-      {
-        to: { path: '/workshop/create' },
-        label: 'ایجاد آموزش'
-      }
-    ]
-  },
-  {
-    to: '',
-    icon: roundSupportAgent,
-    label: 'پشتیبانی',
-    expand: false,
-    subMenu: [
-      {
-        label: 'لیست تیکت‌ها'
-      }
-    ]
-  },
-  {
-    label: 'خروج',
-    icon: roundLogout,
-    function: () => { useServices().auth.logOut() }
+function useDrawer () {
+  const drawer = ref(false)
+  const menus = ref([
+    {
+      label: 'لیست مشتریان',
+      icon: roundGroups,
+      to: { path: '/users/management' }
+    },
+    {
+      label: 'مدیریت حساب',
+      icon: roundPersonAdd,
+      to: { path: '/users/create' }
+    },
+    {
+      to: { path: '/workshop/list' },
+      icon: roundNotifications,
+      label: 'آموزش',
+      expand: false,
+      subMenu: [
+        {
+          to: { path: '/workshop/create' },
+          label: 'ایجاد آموزش'
+        }
+      ]
+    },
+    {
+      label: 'خروج',
+      icon: roundLogout,
+      function: () => { useServices().auth.logOut() }
+    }
+  ])
+  const isRouteActive = (to) => {
+    return route.path === to?.path
   }
-])
 
-const isRouteActive = (to) => {
-  return route.path === to?.path
+  return {
+    drawer,
+    route,
+    menus,
+    isRouteActive
+  }
 }
 </script>
 

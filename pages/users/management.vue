@@ -3,7 +3,6 @@ import { API_URL_USERS } from '~/services'
 import { roundFilterAlt, roundPhoneIphone, roundSearch } from '@quasar/extras/material-icons-round'
 
 const { $dayjs } = useNuxtApp()
-
 const { columns, sortOption } = useTable()
 const { details, openDialog } = useLoadDialog()
 const { cityOption, cityOptionFilter, provincesList } = useCity()
@@ -15,10 +14,10 @@ const { rows, filter, request, loading, tableRef, onRequest, pagination } = useT
 })
 const { filterTable, clearFilter, filterFn } = useFilter()
 
-onMounted(async () => {
-  await provincesList()
+onMounted(() => {
+  provincesList()
   if (!filter.value.city_id) delete filter.value.city_id
-  await request()
+  request()
 })
 
 function useTable () {

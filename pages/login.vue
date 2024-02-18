@@ -5,23 +5,31 @@ import Background from '~/assets/auth-background.png'
 definePageMeta({ layout: 'login-layout' })
 
 const nuxtApp = useNuxtApp()
-const loading = ref(false)
+const { loading, form, login } = useLogin()
 
-const form = ref({
-  username: '',
-  password: ''
-})
+function useLogin () {
+  const loading = ref(false)
+  const form = ref({
+    username: '',
+    password: ''
+  })
+  const login = async () => {
+    loading.value = true
+    useServices().auth.login(form.value)
+      .then(res => {
+        LocalStorage.set('token', res.access_token)
+        nuxtApp.$router.push('/users/management')
+      }).catch((err) => console.log(err))
+      .finally(() => {
+        loading.value = false
+      })
+  }
 
-const login = async () => {
-  loading.value = true
-  useServices().auth.login(form.value)
-    .then(res => {
-      LocalStorage.set('token', res.access_token)
-      nuxtApp.$router.push('/users/management')
-    }).catch((err) => console.log(err))
-    .finally(() => {
-      loading.value = false
-    })
+  return {
+    form,
+    login,
+    loading
+  }
 }
 </script>
 

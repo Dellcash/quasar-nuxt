@@ -2,9 +2,14 @@ export function requiredRule (value) {
   return !!value || 'لطفا این فیلد را تکمیل نمایید'
 }
 
-export function passwordChecker (value) {
-  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d\S]{8,}$/
-  return !!passwordPattern.test(value) || 'رمز عبور باید به زبان انگلیسی و حداقل 8 کاراکتر داشته باشد و شامل ترکیبی از حروف بزرگ و کوچک و اعداد باشد.'
+export function isValidPassword (password) {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d\S]{8,}$/
+  return regex.test(password) || 'رمز عبور باید به زبان انگلیسی و حداقل 8 کاراکتر داشته باشد و شامل ترکیبی از حروف بزرگ و کوچک و اعداد باشد.'
+}
+
+export function isValidUsername (username) {
+  const regex = /^[a-zA-Z0-9_]{4,30}$/
+  return regex.test(username) || 'فرمت نام کاربری نادرست است'
 }
 
 export function onlyNumber (value) {

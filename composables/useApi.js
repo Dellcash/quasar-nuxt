@@ -18,7 +18,7 @@ export const useApi = () => {
 
     try {
       const response = await nuxtApp.$fetch(url, options)
-
+      // Notify.create({ type: 'success', message: response })
       return response
     }
     catch (error) {

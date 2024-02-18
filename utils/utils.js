@@ -1,5 +1,5 @@
-import { dayjs } from '@/plugins/dayjs'
 import jalaali from 'jalaali-js'
+import { dayjs } from '@/plugins/dayjs'
 
 export function toPersianNumber (num) {
   const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
