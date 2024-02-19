@@ -11,14 +11,14 @@
     "lint": "eslint --ext .js,.vue ./"
   },
   "dependencies": {
+    "@quasar/extras": "^1.16.9",
+    "dayjs": "^1.11.10",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.21.1",
-    "@quasar/extras": "^1.16.9",
-    "dayjs": "^1.11.10",
     "jalaali-js": "^1.2.6",
     "jalaliday": "^2.3.0",
     "nuxt": "^3.10.1",
@@ -27,11 +27,12 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@nuxt/eslint-config": "^0.2.0",
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "eslint": "^8.56.0",
     "nuxt-quasar-ui": "^2.0.7",
     "postcss-rtlcss": "^5.1.0",
     "sass": "^1.70.0",
-    "@nuxt/eslint-config": "^0.2.0",
-    "@nuxtjs/eslint-module": "^4.1.0",
-    "eslint": "^8.56.0"
+    "vuetify-nuxt-module": "^0.11.0"
   }
 }

@@ -23,12 +23,12 @@ export const useApi = () => {
     }
     catch (error) {
       if ([401, 403, 404, 400, 406].includes(error.response?.status)) {
-        Notify.create({
-          type: 'error',
-          message: error.response?._data.detail,
-          progress: false,
-          position: 'top'
-        })
+        // Notify.create({
+        //   type: 'error',
+        //   message: error.response?._data.detail,
+        //   progress: false,
+        //   position: 'top'
+        // })
       }
 
       if (error.response?.status === 401) {
