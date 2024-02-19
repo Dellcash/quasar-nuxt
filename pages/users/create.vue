@@ -3,11 +3,39 @@ import { API_URL_USERS } from '~/services'
 import { roundSearch, roundVisibility, roundVisibilityOff } from '@quasar/extras/material-icons-round'
 
 const { isPwd, userLoading, formRef, form, generateUser } = useGenerate()
-const { columns, rows, filter, loading, pagination, onRequest, request, tableRef } = useTable()
+const { rows, loading, pagination, filter, onRequest, request, tableRef } = useTableHandler({
+  url: API_URL_USERS.usersList,
+  params: {
+    filled_profile: false,
+    sort: 'ASC'
+  }
+})
 filter.value = {
   mobile_number: ''
 }
-
+const columns = [
+  {
+    name: 'index',
+    label: 'ردیف',
+    align: 'left',
+    field: 'user_id',
+    headerStyle: 'width: 100px'
+  },
+  {
+    name: 'username',
+    label: 'نام کاربری',
+    align: 'left',
+    field: 'username',
+    headerStyle: 'width: 300px'
+  },
+  {
+    name: 'mobile_number',
+    label: 'شماره موبایل',
+    align: 'left',
+    field: val => toPersianNumber(val.mobile_number),
+    headerStyle: 'font-size:16px'
+  }
+]
 onMounted(request)
 
 function useGenerate () {
@@ -28,6 +56,7 @@ function useGenerate () {
 
         formRef.value.reset()
         formRef.value.resetValidation()
+        request()
         useNotify()('success', res)
       }).catch(err => {
         console.log('error', err)
@@ -42,44 +71,6 @@ function useGenerate () {
     formRef,
     userLoading,
     generateUser
-  }
-}
-
-console.log('API_URL_USERS.usersList', API_URL_USERS.usersList)
-function useTable () {
-  const columns = [
-    {
-      name: 'index',
-      label: 'ردیف',
-      align: 'left',
-      field: 'user_id',
-      headerStyle: 'width: 100px'
-    },
-    {
-      name: 'username',
-      label: 'نام کاربری',
-      align: 'left',
-      field: 'username',
-      headerStyle: 'width: 300px'
-    },
-    {
-      name: 'mobile_number',
-      label: 'شماره موبایل',
-      align: 'left',
-      field: val => toPersianNumber(val.mobile_number),
-      headerStyle: 'font-size:16px'
-    }
-  ]
-  const { rows, loading, pagination, filter, onRequest, request, tableRef } = useTableHandler({
-    url: API_URL_USERS.usersList,
-    params: {
-      filled_profile: false,
-      sort: 'ASC'
-    }
-  })
-
-  return {
-    columns, rows, loading, pagination, onRequest, request, tableRef, filter
   }
 }
 </script>
