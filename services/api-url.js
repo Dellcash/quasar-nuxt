@@ -5,5 +5,5 @@ export const API_URL_AUTH = {
 export const API_URL_USERS = {
   usersList: 'backoffice/users',
   provincesList: 'geo/provinces',
-  generateUser: '/backoffice/generate_user'
+  generateUser: 'backoffice/generate_user'
 }

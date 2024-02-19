@@ -1,8 +1,14 @@
 <script setup>
-import { roundVisibility, roundVisibilityOff } from '@quasar/extras/material-icons-round'
+import { API_URL_USERS } from '~/services'
+import { roundSearch, roundVisibility, roundVisibilityOff } from '@quasar/extras/material-icons-round'
 
-// const { $notify } = useNotif()
 const { isPwd, userLoading, formRef, form, generateUser } = useGenerate()
+const { columns, rows, filter, loading, pagination, onRequest, request, tableRef } = useTable()
+filter.value = {
+  mobile_number: ''
+}
+
+onMounted(request)
 
 function useGenerate () {
   const isPwd = ref(true)
@@ -17,18 +23,14 @@ function useGenerate () {
   const generateUser = () => {
     userLoading.value = true
     useServices().users.generateUser(form.value)
-      .then(() => {
-        form.value.username = ''
-        form.value.password = ''
-        form.value.mobile_number = ''
+      .then(res => {
+        form.value = { username: '', password: '', mobile_number: '' }
 
         formRef.value.reset()
         formRef.value.resetValidation()
-        // $notify('success', 'ایجاد حساب کاربر با موفقیت انجام شد!')
-        // $notify({ type: 'success', message: res })
+        useNotify()('success', res)
       }).catch(err => {
         console.log('error', err)
-        // $notify('error', err.response._data.detail)
       }).finally(() => {
         userLoading.value = false
       })
@@ -40,6 +42,44 @@ function useGenerate () {
     formRef,
     userLoading,
     generateUser
+  }
+}
+
+console.log('API_URL_USERS.usersList', API_URL_USERS.usersList)
+function useTable () {
+  const columns = [
+    {
+      name: 'index',
+      label: 'ردیف',
+      align: 'left',
+      field: 'user_id',
+      headerStyle: 'width: 100px'
+    },
+    {
+      name: 'username',
+      label: 'نام کاربری',
+      align: 'left',
+      field: 'username',
+      headerStyle: 'width: 300px'
+    },
+    {
+      name: 'mobile_number',
+      label: 'شماره موبایل',
+      align: 'left',
+      field: val => toPersianNumber(val.mobile_number),
+      headerStyle: 'font-size:16px'
+    }
+  ]
+  const { rows, loading, pagination, filter, onRequest, request, tableRef } = useTableHandler({
+    url: API_URL_USERS.usersList,
+    params: {
+      filled_profile: false,
+      sort: 'ASC'
+    }
+  })
+
+  return {
+    columns, rows, loading, pagination, onRequest, request, tableRef, filter
   }
 }
 </script>
@@ -161,7 +201,7 @@ function useGenerate () {
       </q-form>
     </q-card>
 
-    <!-- <q-table ref="tableRef"
+    <q-table ref="tableRef"
              v-model:pagination="pagination"
              flat
              :rows="rows"
@@ -205,7 +245,7 @@ function useGenerate () {
         </td>
       </template>
     </q-table>
-    <div
+    <!-- <div
       class="q-mt-md row justify-end"
     >
       <q-btn color="secondary"
