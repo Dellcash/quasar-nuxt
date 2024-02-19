@@ -121,7 +121,6 @@ function useFilter () {
     play_house_name: '',
     sort: 'ASC'
   })
-
   const filterTable = () => {
     request({
       params: {
@@ -131,7 +130,6 @@ function useFilter () {
       }
     })
   }
-
   const clearFilter = () => {
     filter.value = {
       mobile_number: '',
@@ -144,7 +142,6 @@ function useFilter () {
       }
     })
   }
-
   const filterFn = (val, update) => {
     if (val === '') {
       update(() => {

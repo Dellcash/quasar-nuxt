@@ -24,6 +24,18 @@ function useDrawer () {
       to: { path: '/users/create' }
     },
     {
+      to: { path: '/notification' },
+      icon: '',
+      label: 'اطلاعیه',
+      expand: false,
+      subMenu: [
+        {
+          to: { path: '/notification/create' },
+          label: 'ایجاد اطلاعیه'
+        }
+      ]
+    },
+    {
       to: { path: '/workshop/list' },
       icon: roundNotifications,
       label: 'آموزش',
