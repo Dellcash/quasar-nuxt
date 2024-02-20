@@ -18,17 +18,11 @@ export const useApi = () => {
 
     try {
       const response = await nuxtApp.$fetch(url, options)
-      // Notify.create({ type: 'success', message: response })
       return response
     }
     catch (error) {
-      if ([401, 403, 404, 400, 406].includes(error.response?.status)) {
-        Notify.create({
-          type: 'error',
-          message: error.response?._data.detail,
-          progress: false,
-          position: 'top'
-        })
+      if ([401, 403, 404, 400, 406, 405].includes(error.response?.status)) {
+        useNotify()('error', error.response?._data.detail)
       }
 
       if (error.response?.status === 401) {

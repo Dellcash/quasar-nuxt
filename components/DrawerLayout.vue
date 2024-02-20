@@ -32,6 +32,10 @@ function useDrawer () {
         {
           to: { path: '/notification/create' },
           label: 'ایجاد اطلاعیه'
+        },
+        {
+          to: { path: '/notification/announce' },
+          label: 'اطلاع رسانی تمدید'
         }
       ]
     },

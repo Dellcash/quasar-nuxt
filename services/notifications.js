@@ -1,15 +1,19 @@
 import { API_URL_NOTIF } from '.'
 
 export const notifService = {
-  async newAnnounc (form) {
-    return await useApi()(API_URL_NOTIF.newAnnounc, {
-      method: 'POST',
-      body: form
-    })
+  newAnnounc (form) {
+    return useCallApi(API_URL_NOTIF.newAnnounc, 'POST', form)
   },
-  async deleteAnnounc (id) {
-    return await useApi()(API_URL_NOTIF.deleteAnnounc(id), {
-      method: 'DELETE'
-    })
+  deleteAnnounc (id) {
+    return useCallApi(API_URL_NOTIF.deleteAnnounc(id), 'DELETE')
+  },
+  setNewConfig (form) {
+    return useCallApi(API_URL_NOTIF.setNewConfig, 'PUT', form)
+  },
+  getNotifConfig () {
+    return useCallApi(API_URL_NOTIF.getNotifConfig)
+  },
+  setStatus (form) {
+    return useCallApi(API_URL_NOTIF.setStatus, 'PATCH', form)
   }
 }
