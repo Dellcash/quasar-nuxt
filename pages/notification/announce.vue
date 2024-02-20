@@ -78,7 +78,7 @@ function useAnnounce () {
       offsets: form.value.announcCount,
       text: form.value.text
     }
-    console.log(body)
+    // console.log(body)
     useServices().notif.setStatus(body)
       .then(() => useNotify('success', 'آپدیت شد'))
       .catch(err => {

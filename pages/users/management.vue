@@ -1,6 +1,7 @@
 <script setup>
 import { API_URL_USERS } from '~/services'
 import { roundFilterAlt, roundPhoneIphone, roundSearch } from '@quasar/extras/material-icons-round'
+import { LocalStorage } from 'quasar'
 
 const { $dayjs } = useNuxtApp()
 const { columns, sortOption } = useTable()
@@ -168,21 +169,43 @@ function useFilter () {
 function useCity () {
   const cityOption = ref([])
   const cityOptionFilter = ref([])
-  const provincesList = () => {
-    useServices().users.fetchProvinces()
-      .then(res => {
-        res.forEach(item => item.cities.forEach(city => {
-          cityOption.value.push({
-            label: city.name,
-            value: city.city_id
-          })
+  const provincesList = async () => {
+    // useServices().users.fetchProvinces()
+    try {
+      const { data } = await useFetch(`https://bazi-back.netall.live/api/${API_URL_USERS.provincesList}`, {
+        headers: {
+          Authorization: `Bearer ${LocalStorage.getItem('token')}`
+        }
+      })
 
-          cityOptionFilter.value.push({
-            label: city.name,
-            value: city.city_id
-          })
-        }))
-      }).catch(err => console.log(err))
+      console.log('resres', data.value)
+      // await res.forEach(item => item.cities.forEach(city => {
+      //   cityOption.value.push({
+      //     label: city.name,
+      //     value: city.city_id
+      //   })
+
+      //   cityOptionFilter.value.push({
+      //     label: city.name,
+      //     value: city.city_id
+      //   })
+      // }))
+    }
+    catch (err) { console.log(err) }
+    // .then(res => {
+    //   // console.log('resres', res)
+    //   res.forEach(item => item.cities.forEach(city => {
+    //     cityOption.value.push({
+    //       label: city.name,
+    //       value: city.city_id
+    //     })
+
+    //     cityOptionFilter.value.push({
+    //       label: city.name,
+    //       value: city.city_id
+    //     })
+    //   }))
+    // }).catch(err => console.log(err))
   }
 
   return {
