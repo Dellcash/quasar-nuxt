@@ -16,7 +16,7 @@ function useLogin () {
 
   const login = async () => {
     loading.value = true
-    useServices().auth.login(fetchClient, form.value)
+    useServices().auth.login(form.value)
       .then(res => {
         LocalStorage.set('token', res.access_token)
         nuxtApp.$router.push('/users/management')
