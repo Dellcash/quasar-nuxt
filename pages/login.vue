@@ -5,6 +5,7 @@ import Background from '~/assets/auth-background.png'
 definePageMeta({ layout: 'login-layout' })
 
 const nuxtApp = useNuxtApp()
+const { fetchClient } = useApiFetcher()
 const { loading, form, login } = useLogin()
 
 function useLogin () {
@@ -13,13 +14,14 @@ function useLogin () {
     username: '',
     password: ''
   })
+
   const login = async () => {
     loading.value = true
-    useServices().auth.login(form.value)
+    useServices().auth.login(fetchClient, form.value)
       .then(res => {
         LocalStorage.set('token', res.access_token)
         nuxtApp.$router.push('/users/management')
-      }).catch((err) => console.log(err))
+      })
       .finally(() => {
         loading.value = false
       })

@@ -1,9 +1,9 @@
 <script setup>
 import { API_URL_USERS } from '~/services'
 import { roundFilterAlt, roundPhoneIphone, roundSearch } from '@quasar/extras/material-icons-round'
-import { LocalStorage } from 'quasar'
 
 const { $dayjs } = useNuxtApp()
+const { fetchClient } = useApiFetcher()
 const { columns, sortOption } = useTable()
 const { details, openDialog } = useLoadDialog()
 const { cityOption, cityOptionFilter, provincesList } = useCity()
@@ -169,43 +169,21 @@ function useFilter () {
 function useCity () {
   const cityOption = ref([])
   const cityOptionFilter = ref([])
-  const provincesList = async () => {
-    // useServices().users.fetchProvinces()
-    try {
-      const { data } = await useFetch(`https://bazi-back.netall.live/api/${API_URL_USERS.provincesList}`, {
-        headers: {
-          Authorization: `Bearer ${LocalStorage.getItem('token')}`
-        }
-      })
+  const provincesList = () => {
+    useServices().users.fetchProvinces(fetchClient)
+      .then(res => {
+        res.forEach(item => item.cities.forEach(city => {
+          cityOption.value.push({
+            label: city.name,
+            value: city.city_id
+          })
 
-      console.log('resres', data.value)
-      // await res.forEach(item => item.cities.forEach(city => {
-      //   cityOption.value.push({
-      //     label: city.name,
-      //     value: city.city_id
-      //   })
-
-      //   cityOptionFilter.value.push({
-      //     label: city.name,
-      //     value: city.city_id
-      //   })
-      // }))
-    }
-    catch (err) { console.log(err) }
-    // .then(res => {
-    //   // console.log('resres', res)
-    //   res.forEach(item => item.cities.forEach(city => {
-    //     cityOption.value.push({
-    //       label: city.name,
-    //       value: city.city_id
-    //     })
-
-    //     cityOptionFilter.value.push({
-    //       label: city.name,
-    //       value: city.city_id
-    //     })
-    //   }))
-    // }).catch(err => console.log(err))
+          cityOptionFilter.value.push({
+            label: city.name,
+            value: city.city_id
+          })
+        }))
+      }).catch(err => console.log(err))
   }
 
   return {

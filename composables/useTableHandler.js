@@ -1,4 +1,10 @@
+// import { LocalStorage } from 'quasar'
+
 export const useTableHandler = ({ url, params = {} }) => {
+  // const nuxtApp = useNuxtApp()
+  const { fetchClient, fetchServer } = useApiFetcher() // Assuming you're using fetchClient for client-side fetching
+
+  console.log('')
   const rows = ref([])
   const filter = ref(null)
   const tableRef = ref(null)
@@ -23,10 +29,18 @@ export const useTableHandler = ({ url, params = {} }) => {
     }
 
     try {
-      const response = await useApi()(url, { params: requestData })
-      rows.value = response.data
-      loading.value = false
-      pagination.value.rowsNumber = response.count
+      // const { data } = await useFetch(`${nuxtApp.$config.public.baseURL}${url}`, {
+      //   params: requestData,
+      //   headers: {
+      //     Authorization: `Bearer ${LocalStorage.getItem('token')}`
+      //   }
+      // })
+      const resClient = await fetchClient(url, { params: requestData })
+      const resServer = fetchServer(url, { params: requestData })
+      console.log('fetch client', resClient)
+      console.log('fetch server', resServer)
+      // rows.value = response.value.data
+      // pagination.value.rowsNumber = response.value.count
     }
     catch (err) {
       console.log('err', err)
