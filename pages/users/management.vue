@@ -3,7 +3,6 @@ import { API_URL_USERS } from '~/services'
 import { roundFilterAlt, roundPhoneIphone, roundSearch } from '@quasar/extras/material-icons-round'
 
 const { $dayjs } = useNuxtApp()
-const { fetchClient } = useApiFetcher()
 const { columns, sortOption } = useTable()
 const { details, openDialog } = useLoadDialog()
 const { cityOption, cityOptionFilter, provincesList } = useCity()
@@ -170,7 +169,7 @@ function useCity () {
   const cityOption = ref([])
   const cityOptionFilter = ref([])
   const provincesList = () => {
-    useServices().users.fetchProvinces(fetchClient)
+    useServices().users.fetchProvinces()
       .then(res => {
         res.forEach(item => item.cities.forEach(city => {
           cityOption.value.push({
