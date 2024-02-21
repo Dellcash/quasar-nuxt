@@ -2,9 +2,14 @@ import { API_URL_USERS } from '.'
 
 export const usersService = {
   fetchProvinces () {
-    return useCallApi(API_URL_USERS.provincesList)
+    const { fetchClient } = useApi()
+    return fetchClient(API_URL_USERS.provincesList)
   },
   generateUser (form) {
-    return useCallApi(API_URL_USERS.generateUser, 'POST', form)
+    const { fetchServer } = useApi()
+    return fetchServer(API_URL_USERS.generateUser, {
+      method: 'POST',
+      body: form
+    })
   }
 }

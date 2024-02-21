@@ -165,24 +165,6 @@ function useFilter () {
   }
 }
 
-// const data1 = ref(null)
-// const { data: datadata1 } = useFetch('https://pokeapi.co/api/v2/pokemon/')
-// data1.value = datadata1.value
-// console.log('data1.value', data1.value)
-
-// const data2 = ref(null)
-// const { data: datadata2, error: error2 } = useFetch('https://bazi-back.netall.live/api/geo/provinces', {
-//   headers: {
-//     contentType: 'application/json',
-//     authorization: `Bearer ${LocalStorage.getItem('token')}`
-//   }
-// })
-// data2.value = datadata2.value
-// if (error2.value) {
-//   console.error('Error fetching data2:', error2.value)
-// }
-// console.log('data2.value', data2.value)
-
 function useCity () {
   const cityOption = ref([])
   const cityOptionFilter = ref([])
@@ -235,6 +217,8 @@ function useLoadDialog () {
     >
       لیست مشتریان
     </div>
+    <!-- {{ data2 }}
+    {{ data1 }} -->
 
     <q-card bordered
             flat

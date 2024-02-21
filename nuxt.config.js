@@ -1,6 +1,7 @@
 import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
+  ssr: true,
   router: {
     middleware: ['auth.global']
   },
