@@ -3,7 +3,11 @@ import { LocalStorage } from 'quasar'
 
 export const authService = {
   login (form) {
-    return useCallApi(API_URL_AUTH.login, 'POST', new URLSearchParams(form))
+    const { fetchClient } = useApi()
+    return fetchClient(API_URL_AUTH.login, {
+      method: 'POST',
+      body: new URLSearchParams(form)
+    })
   },
   logOut () {
     LocalStorage.clear()
