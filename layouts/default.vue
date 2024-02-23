@@ -261,7 +261,9 @@ onMounted(() => {
       </q-toolbar>
     </q-header>
 
-    <DrawerLayout />
+    <DrawerLayout
+      :drawer="drawer"
+    />
 
     <q-page-container>
       <slot />

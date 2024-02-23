@@ -19,7 +19,7 @@ export const useApi = () => {
     try {
       const response = await useFetch(`${nuxtApp.$config.public.baseURL}${url}`, options)
 
-      return response.data.value
+      return response
     }
     catch (error) {
       if ([401, 403, 404, 400, 406, 405].includes(error.response?.status)) {

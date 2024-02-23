@@ -7,6 +7,13 @@ import {
   roundPersonAdd
 } from '@quasar/extras/material-icons-round'
 
+// defineProps({
+//   drawer: {
+//     type: Boolean,
+//     required: true
+//   }
+// })
+
 const route = useRoute()
 const { drawer, menus, isRouteActive } = useDrawer()
 
