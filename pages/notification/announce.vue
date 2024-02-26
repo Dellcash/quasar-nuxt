@@ -1,9 +1,7 @@
 <script setup>
-import { API_URL_NOTIF } from '~/services'
-
 const { setStatus, getNotifConfig } = useAnnounce()
 const { form, formRef, typeOptions, dateOptions, setNewConfig, newConfigLoading } = useForm()
-onMounted(getNotifConfig)
+getNotifConfig()
 
 function useForm () {
   const formRef = ref(false)
@@ -54,17 +52,14 @@ function useForm () {
   }
 }
 
-const { fetchServer } = useApi()
 function useAnnounce () {
   const getNotifConfig = () => {
-    // Loading.show()
-    // useServices().notif.getNotifConfig()
-    fetchServer(API_URL_NOTIF.getNotifConfig)
+    Loading.show()
+    useServices().notif.getNotifConfig()
       .then(res => {
-        console.log('announcement', res.data.value)
-        form.value.toggle = res.data.value.status
-        form.value.announcType = res.data.value.medium
-        form.value.announcCount = res.data.value.offsets
+        form.value.toggle = res.status
+        form.value.announcType = res.medium
+        form.value.announcCount = res.offsets
         form.value.text = res.text
       })
       .catch(err => {

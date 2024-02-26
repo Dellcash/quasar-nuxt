@@ -1,10 +1,10 @@
 <script setup>
-import { LocalStorage } from 'quasar'
 import Background from '~/assets/auth-background.png'
 
 definePageMeta({ layout: 'login-layout' })
 
 const nuxtApp = useNuxtApp()
+const cookie = useCookie('token')
 const { loading, form, login } = useLogin()
 
 function useLogin () {
@@ -18,7 +18,7 @@ function useLogin () {
     loading.value = true
     useServices().auth.login(form.value)
       .then(res => {
-        LocalStorage.set('token', res.access_token)
+        cookie.value = res.access_token
         nuxtApp.$router.push('/users/management')
       }).catch((err) => console.log(err))
       .finally(() => {

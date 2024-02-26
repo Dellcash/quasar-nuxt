@@ -14,8 +14,8 @@ const { rows, filter, request, loading, tableRef, onRequest, pagination } = useT
 })
 const { filterTable, clearFilter, filterFn } = useFilter()
 
+provincesList()
 onMounted(() => {
-  provincesList()
   if (!filter.value.city_id) delete filter.value.city_id
   request()
 })

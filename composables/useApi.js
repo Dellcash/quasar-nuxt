@@ -1,25 +1,19 @@
-import { LocalStorage } from 'quasar'
-
 export const useApi = () => {
   const nuxtApp = useNuxtApp()
 
-  const getToken = () => {
-    return LocalStorage.getItem('token')
-  }
-
   const fetchServer = async (url, options = {}) => {
-    const token = getToken()
-    if (token) {
+    const cookie = useCookie('token')
+    if (cookie) {
       options.headers = {
         ...options.headers,
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${cookie.value}`
       }
     }
 
     try {
       const response = await useFetch(`${nuxtApp.$config.public.baseURL}${url}`, options)
 
-      return response
+      return response.data.value
     }
     catch (error) {
       if ([401, 403, 404, 400, 406, 405].includes(error.response?.status)) {
@@ -41,11 +35,11 @@ export const useApi = () => {
   }
 
   const fetchClient = async (url, options = {}) => {
-    const token = getToken()
-    if (token) {
+    const cookie = useCookie('token')
+    if (cookie) {
       options.headers = {
         ...options.headers,
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${cookie.value}`
       }
     }
 

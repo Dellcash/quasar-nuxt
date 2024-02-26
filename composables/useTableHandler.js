@@ -25,6 +25,7 @@ export const useTableHandler = ({ url, params = {} }) => {
     try {
       const { fetchServer } = useApi()
       const response = await fetchServer(url, { params: requestData })
+
       rows.value = response.data
       loading.value = false
       pagination.value.rowsNumber = response.count

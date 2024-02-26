@@ -1,7 +1,6 @@
 import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
-  ssr: true,
   router: {
     middleware: ['auth.global']
   },
@@ -14,7 +13,7 @@ export default defineNuxtConfig({
     plugins: [eslintPlugin()]
   },
   plugins: ['@/plugins/fetch-client.js', '@/plugins/services.js', '@/plugins/dayjs.js'],
-  css: ['@/assets/css/app.scss', '@/assets/css/colors.scss'],
+  css: ['@/assets/css/app.scss', '@/assets/css/colors.scss', 'cookie-universal-nuxt'],
   modules: [
     'nuxt-quasar-ui',
     '@nuxtjs/eslint-module'
@@ -29,12 +28,9 @@ export default defineNuxtConfig({
     iconSet: 'svg-material-icons-round',
     sassVariables: '@/assets/css/quasar.variables.scss',
     plugins: [
-      'BottomSheet',
       'Dialog',
       'Loading',
-      'LoadingBar',
-      'Notify',
-      'Dark'
+      'Notify'
     ],
     extras: {
       font: 'roboto-font'
