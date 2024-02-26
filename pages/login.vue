@@ -3,7 +3,6 @@ import Background from '~/assets/auth-background.png'
 
 definePageMeta({ layout: 'login-layout' })
 
-const nuxtApp = useNuxtApp()
 const cookie = useCookie('token')
 const { loading, form, login } = useLogin()
 
@@ -19,7 +18,7 @@ function useLogin () {
     useServices().auth.login(form.value)
       .then(res => {
         cookie.value = res.access_token
-        nuxtApp.$router.push('/users/management')
+        navigateTo('/users/management')
       }).catch((err) => console.log(err))
       .finally(() => {
         loading.value = false

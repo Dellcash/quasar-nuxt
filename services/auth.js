@@ -10,6 +10,6 @@ export const authService = {
   logOut () {
     const cookie = useCookie('token')
     cookie.value = null
-    useNuxtApp().$router.push('/login')
+    navigateTo('/login')
   }
 }
