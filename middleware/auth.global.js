@@ -1,12 +1,11 @@
 export default defineNuxtRouteMiddleware((to) => {
   const isLoggedIn = useCookie('token').value
-  const isOnLoginPage = to.path === '/login'
-  const isOnManagementPage = to.path === '/users/management'
 
-  if (isLoggedIn && !isOnManagementPage) {
+  // Check if on the target pages already
+  if (to.path === '/login' && isLoggedIn) {
     return navigateTo('/users/management')
   }
-  else if (!isLoggedIn && !isOnLoginPage) {
+  else if (to.path !== '/login' && !isLoggedIn) {
     return navigateTo('/login')
   }
 })
