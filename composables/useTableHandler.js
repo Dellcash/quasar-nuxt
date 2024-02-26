@@ -23,8 +23,7 @@ export const useTableHandler = ({ url, params = {} }) => {
     }
 
     try {
-      const { fetchServer } = useApi()
-      const response = await fetchServer(url, { params: requestData })
+      const response = await useApi()(url, { params: requestData })
 
       rows.value = response.data
       loading.value = false
