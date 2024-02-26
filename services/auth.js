@@ -1,5 +1,4 @@
 import { API_URL_AUTH } from '.'
-import { LocalStorage } from 'quasar'
 
 export const authService = {
   login (form) {
@@ -9,7 +8,8 @@ export const authService = {
     })
   },
   logOut () {
-    LocalStorage.clear()
+    const cookie = useCookie('token')
+    cookie.value = null
     useNuxtApp().$router.push('/login')
   }
 }

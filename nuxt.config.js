@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     plugins: [eslintPlugin()]
   },
   plugins: ['@/plugins/fetch-client.js', '@/plugins/services.js', '@/plugins/dayjs.js'],
-  css: ['@/assets/css/app.scss', '@/assets/css/colors.scss', 'cookie-universal-nuxt'],
+  css: ['@/assets/css/app.scss', '@/assets/css/colors.scss'],
   modules: [
     'nuxt-quasar-ui',
     '@nuxtjs/eslint-module'
