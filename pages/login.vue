@@ -15,11 +15,13 @@ function useLogin () {
 
   const login = async () => {
     loading.value = true
-    useServices().auth.login(form.value)
-      .then(res => {
+    useServices()
+      .auth.login(form.value)
+      .then((res) => {
         cookie.value = res.access_token
         navigateTo('/users/management')
-      }).catch((err) => console.log(err))
+      })
+      .catch((err) => console.log(err))
       .finally(() => {
         loading.value = false
       })
@@ -51,6 +53,7 @@ function useLogin () {
               <label
                 class="text-black"
               >نام کاربری</label>
+
               <q-input v-model="form.username"
                        dense
                        outlined
@@ -65,6 +68,7 @@ function useLogin () {
               <label
                 class="text-black"
               >رمز عبور</label>
+
               <q-input v-model="form.password"
                        dense
                        outlined
@@ -87,5 +91,3 @@ function useLogin () {
     </div>
   </q-img>
 </template>
-
-<style scoped></style>

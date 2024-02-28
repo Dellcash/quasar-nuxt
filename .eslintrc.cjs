@@ -14,11 +14,7 @@ module.exports = {
   // Rules order is important, please avoid shuffling them
   extends: ['@nuxt/eslint-config', 'standard'],
 
-  plugins: [
-    'vue',
-    'nuxt'
-
-  ],
+  plugins: ['vue', 'nuxt'],
 
   globals: {
     ga: 'readonly', // Google Analytics
@@ -36,54 +32,69 @@ module.exports = {
   rules: {
     'brace-style': [2, 'stroustrup', { allowSingleLine: true }],
 
-    'vue/html-indent': ['error', 2, {
-      attribute: 1,
-      baseIndent: 1,
-      closeBracket: 0,
-      alignAttributesVertically: true,
-      ignores: []
-    }],
-    'vue/first-attribute-linebreak': ['error', {
-      singleline: 'below',
-      multiline: 'beside'
-    }],
-    'vue/max-attributes-per-line': ['error', {
-      singleline: {
-        max: 1
-      },
-      multiline: {
-        max: 1
+    'vue/html-indent': [
+      'error',
+      2,
+      {
+        attribute: 1,
+        baseIndent: 1,
+        closeBracket: 0,
+        alignAttributesVertically: true,
+        ignores: []
       }
+    ],
+    'vue/first-attribute-linebreak': [
+      'error',
+      {
+        singleline: 'below',
+        multiline: 'beside'
+      }
+    ],
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        singleline: {
+          max: 1
+        },
+        multiline: {
+          max: 1
+        }
+      }
+    ],
+    'vue/padding-line-between-tags': [
+      'error',
+      [{ blankLine: 'always', prev: '*', next: '*' }]
+    ],
+    'vue/padding-line-between-blocks': ['error', 'always'],
+    'vue/block-order': ['error', {
+      order: [['script[setup]', 'template'], 'style']
+    }],
+    'vue/new-line-between-multi-line-property': ['error', {
+      minLineOfMultilineProperty: 2
+    }],
+    'vue/no-static-inline-styles': ['error', {
+      allowBinding: true
     }],
 
-    // NEW RULE
-    // 'vue/max-len': ['error', {
-    //   code: 80,
-    //   template: 120,
-    //   comments: 65,
-    //   ignoreUrls: true,
-    //   ignoreComments: true,
-    //   ignoreRegExpLiterals: true,
-    //   ignoreStrings: true,
-    //   ignoreTemplateLiterals: true
-    // }],
-
-    'vue/attributes-order': ['error', {
-      order: [
-        'DEFINITION',
-        'LIST_RENDERING',
-        'CONDITIONALS',
-        'RENDER_MODIFIERS',
-        'GLOBAL',
-        ['UNIQUE', 'SLOT'],
-        'TWO_WAY_BINDING',
-        'OTHER_DIRECTIVES',
-        'OTHER_ATTR',
-        'EVENTS',
-        'CONTENT'
-      ],
-      alphabetical: false
-    }],
+    'vue/attributes-order': [
+      'error',
+      {
+        order: [
+          'DEFINITION',
+          'LIST_RENDERING',
+          'CONDITIONALS',
+          'RENDER_MODIFIERS',
+          'GLOBAL',
+          ['UNIQUE', 'SLOT'],
+          'TWO_WAY_BINDING',
+          'OTHER_DIRECTIVES',
+          'OTHER_ATTR',
+          'EVENTS',
+          'CONTENT'
+        ],
+        alphabetical: false
+      }
+    ],
     'vue/valid-v-for': 0,
     'vue/order-in-components': 'error',
     'vue/no-unused-refs': 'error',
