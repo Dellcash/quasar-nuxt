@@ -53,6 +53,7 @@ defineProps({
                :loading="dltLoading"
                @click="removeFn(), onDialogHide()"
         />
+
         <q-btn label="خیر"
                color="success"
                class="col-5"

@@ -123,6 +123,7 @@ function useAnnounce () {
               >
                 ارسال اطلاع رسانی تمدید برای مشتریان
               </div>
+
               <div
                 class="text-caption-1 text-grey-1"
               >
@@ -171,6 +172,7 @@ function useAnnounce () {
                   <label>دفعات اطلاع رسانی <span
                     class="text-primary"
                   >*</span></label>
+
                   <q-select v-model="form.announcCount"
                             outlined
                             dense
@@ -199,11 +201,13 @@ function useAnnounce () {
                                       @update:model-value="toggleOption(opt)"
                           />
                         </q-item-section>
+
                         <q-item-section>
                           <q-item-label>{{ opt.label }}</q-item-label>
                         </q-item-section>
                       </q-item>
                     </template>
+
                     <template
                       #selected-item="scope"
                     >

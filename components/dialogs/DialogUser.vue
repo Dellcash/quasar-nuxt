@@ -58,6 +58,7 @@ defineProps({
               >
                 {{ details.profile.play_house_name }}
               </div>
+
               <div
                 class="text-caption2"
               >
@@ -92,6 +93,7 @@ defineProps({
                   class="row justify-between items-center"
                 >
                   <div>تاریخ ثبت نام:</div>
+
                   <div
                     class="text-body3 text-weight-bold"
                   />
@@ -101,6 +103,7 @@ defineProps({
                   class="row justify-between items-center"
                 >
                   <div>اعتبار حساب:</div>
+
                   <div
                     class="text-body3 text-weight-bold"
                   >
@@ -127,6 +130,7 @@ defineProps({
             >
               شماره موبایل :
             </div>
+
             <div
               class="text-body3"
             >
@@ -142,6 +146,7 @@ defineProps({
             >
               مجموع درآمد :
             </div>
+
             <div
               class="text-body3"
             >
@@ -157,6 +162,7 @@ defineProps({
             >
               تعداد حساب :
             </div>
+
             <div
               class="text-body3"
             >

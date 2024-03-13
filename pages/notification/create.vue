@@ -225,8 +225,8 @@ function useLoadDialog () {
         <q-td
           :props="props"
         >
-          <div class="ellipsis"
-               style="width: 100px"
+          <div
+            class="ellipsis"
           >
             {{ props.row.title }}
           </div>
@@ -239,8 +239,8 @@ function useLoadDialog () {
         <q-td
           :props="props"
         >
-          <div class="ellipsis"
-               style="width: 200px"
+          <div
+            class="ellipsis"
           >
             {{ props.row.body }}
           </div>

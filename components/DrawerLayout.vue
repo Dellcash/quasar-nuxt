@@ -116,10 +116,12 @@ function useDrawer () {
                       :name="menu.icon"
                       color="inherit"
               />
+
               <div>{{ menu.label }}</div>
             </div>
           </q-item-section>
         </q-item>
+
         <q-expansion-item v-else
                           v-model="menu.expand"
                           group="somegroup"
@@ -138,10 +140,12 @@ function useDrawer () {
                         :name="menu.icon"
                         color="inherit"
                 />
+
                 <div>{{ menu.label }}</div>
               </div>
             </q-item-section>
           </template>
+
           <q-item v-for="sub in menu.subMenu"
                   :key="sub.label"
                   :to="sub.to"

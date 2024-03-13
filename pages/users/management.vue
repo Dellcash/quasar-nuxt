@@ -234,6 +234,7 @@ function useLoadDialog () {
             class="col-12 col-sm-4 q-gutter-y-xs"
           >
             <div>شماره موبایل</div>
+
             <q-input v-model="filter.mobile_number"
                      outlined
                      dense
@@ -255,6 +256,7 @@ function useLoadDialog () {
             class="col-12 col-sm-4 q-gutter-y-xs"
           >
             <div>شهر</div>
+
             <q-select v-model="filter.city_id"
                       :options="cityOption"
                       outlined
@@ -283,6 +285,7 @@ function useLoadDialog () {
             class="col-12 col-sm-4 q-gutter-y-xs"
           >
             <div>مرتب سازی</div>
+
             <q-select v-model="filter.sort"
                       outlined
                       dense
